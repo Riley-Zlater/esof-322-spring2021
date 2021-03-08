@@ -1,7 +1,6 @@
 package edu.montana.esof322.controller;
 
 import edu.montana.esof322.model.MSUClass;
-import edu.montana.esof322.model.User;
 import edu.montana.esof322.util.Web;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class MSUClassesController {
-    public static void init(){
+    public static void init() {
         /* CREATE */
         get("/classes/new", (req, resp) -> {
             MSUClass msuClass = new MSUClass();

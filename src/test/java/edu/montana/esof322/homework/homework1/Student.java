@@ -37,15 +37,18 @@ public class Student {
             this.firstName = firstName;
             return this;
         }
+
         public StudentBuilder withLastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
+
         public StudentBuilder withId(String id) {
             this.id = id;
             return this;
         }
-        public Student build(){
+
+        public Student build() {
             if (id == null) {
                 id = java.util.UUID.randomUUID().toString();
             }
