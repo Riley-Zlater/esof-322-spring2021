@@ -7,20 +7,48 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Homework2 {
 
-    int invocationCount = 0;
     StringBuilder output = new StringBuilder();
+    int invocationCount = 0;
 
-    class ThingDoer {
-        void doIt() {
+    public interface IDoAThing {
+        void doIt();
+    }
+
+    public class ThingDoer implements IDoAThing {
+        @Override
+        public void doIt() {
             output.append("Did it!\n");
         }
     }
+
+    public class IDoAThingProxy implements IDoAThing {
+        private final IDoAThing _thingDoer;
+
+        public IDoAThingProxy(IDoAThing thingDoer) {
+            _thingDoer = thingDoer;
+        }
+
+        @Override
+        public void doIt() {
+            invocationCount++;
+            _thingDoer.doIt();
+        }
+    }
+
+    public class IDoAThingFactory {
+        public IDoAThing DoThing() {
+            return new IDoAThingProxy(new ThingDoer()) {
+            };
+        }
+    }
+
 
     //=======================================================================
     // Your boss wants to know how many times a method on a given class is
     // being invoked.  Your job is to take the the code above and refactor it
     // using some patterns to capture the needed information.
     //=======================================================================
+
     @Test
     void theAssignment() {
         // Step 1: extract an interface for ThingDoer, IDoAThing and
@@ -28,7 +56,7 @@ public class Homework2 {
 
         // Step 2: replace this new expression with a factory to produce
         //         IDoAThings
-        ThingDoer thingDoer = new ThingDoer();
+        var thingDoer = new IDoAThingFactory().DoThing();
 
         // Step 3: use the factory to insert a proxy object that wraps
         //         a ThingDoer and increments the invocationCount
@@ -47,6 +75,4 @@ public class Homework2 {
         assertEquals(output.toString(),
                 "Did it!\nDid it!\nDid it!\n");
     }
-
-
 }
