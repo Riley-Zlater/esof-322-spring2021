@@ -36,7 +36,7 @@ public class Homework2 {
     }
 
     public class IDoAThingFactory {
-        public IDoAThing DoThing() {
+        public IDoAThing doAThing() {
             return new IDoAThingProxy(new ThingDoer()) {
             };
         }
@@ -56,7 +56,7 @@ public class Homework2 {
 
         // Step 2: replace this new expression with a factory to produce
         //         IDoAThings
-        var thingDoer = new IDoAThingFactory().DoThing();
+        var thingDoer = new IDoAThingFactory().doAThing();
 
         // Step 3: use the factory to insert a proxy object that wraps
         //         a ThingDoer and increments the invocationCount
