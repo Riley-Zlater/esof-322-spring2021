@@ -37,6 +37,7 @@ public class Homework2 {
 
     public class IDoAThingFactory {
         public IDoAThing doAThing() {
+            // don't need the trailing {} here... ask me about that...
             return new IDoAThingProxy(new ThingDoer()) {
             };
         }
